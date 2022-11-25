@@ -1,0 +1,10 @@
+{
+  "staging": {
+    "BASE_URL": "https://api.openweathermap.org/",
+    "APP_KEY": "387f47c8f74c82d84545c74c75eba50d"
+  },
+  "production": {
+    "BASE_URL": "https://api.openweathermap.org/",
+    "APP_KEY": "387f47c8f74c82d84545c74c75eba50d"
+  }
+}
