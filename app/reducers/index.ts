@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-import weatherForecaseReducer from './WeatherForecastReducer';
+import categoriesReducer from './categoriesReducer';
 import configureStore from '../store';
 import rootSaga from '../sagas';
 
 export default () => {
     const rootReducer = combineReducers({
-        weatherForecaseReducer,
+        categoriesReducer,
     });
     return configureStore(rootReducer, rootSaga);
 };
