@@ -9,18 +9,29 @@ import ListItemLayout from '../../layouts/ListItemLayout';
 import Theme from '../../utils/Theme';
 import { connect } from 'react-redux';
 import getCategories, { addCategories, deleteCategory } from '../../actions/categoriesActions';
-import getListItems from '../../actions/listItemsAction';
- 
+import getListItems, { addListItems } from '../../actions/listItemsAction';
+
 type Props = NativeStackScreenProps<DrawerParamList, 'Category'> & {
   name: string;
   categories: any;
-  fields: [{id: number, name: 'string', type: 'string'}];
+  fields: [{ id: number, name: 'string', type: 'string' }];
+  addListItems: (any) => void;
 }
 
-const Category = (props : Props) => {
-  const [fields, setFields] = useState([]); 
+const Category = (props: Props) => {
+  const [fields, setFields] = useState([]);
+  let data = {};
   const onAddFields = () => {
-    setFields(props.fields)
+    setFields(props.fields);
+    Object.keys(props.fields).forEach(element => {
+      data[props.fields[element].name] = ""
+    })
+    data["categoryId"] = props.id;
+    props.addListItems(data);
+  }
+
+  const onEditFields = (items) => {
+    setFields([...items])
   }
 
   return (
@@ -35,18 +46,20 @@ const Category = (props : Props) => {
         </View>
       </View>
 
-      <ListItemLayout fields={fields} />
+      <ListItemLayout fields={fields} onEditFields={onEditFields} />
     </View>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
+    listItems: state.categoriesReducer.listItems
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   getListItems: (categoryId) => dispatch(getListItems(categoryId)),
+  addListItems: (data) => dispatch(addListItems(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems:'center'
+    alignItems: 'center'
   },
   buttonContainer: {
     width: '50%'

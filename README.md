@@ -1,6 +1,6 @@
-# Simple Weather Search App
+# Simple Inventory management Search App
 
-To create a simple weather search App in react native which would display the recent most weather details in a particular day.
+To create a simple Inventory management App in react native
 
 ## Prerequisites
 

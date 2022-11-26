@@ -5,15 +5,6 @@ export default function getDayOfWeek(date) {
         ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek];
 }
 
-// create image URL
-export const createImageUrl = (path) => {
-    if(path !== "") {
-        return `https://openweathermap.org/img/w/${path}.png`;
-    } else {
-        return `https://openweathermap.org/img/w/demo.png`
-    }
-}
-
 // displaying alert
 export const showAlert = (message) => {
     alert(message)

@@ -8,7 +8,7 @@ const App = () => {
   const store = createStore();
   return (
     <Provider store={store}>
-      {/* wrapping root component 'WeatherSearch' within <Provider/> */}
+      {/* wrapping root component 'Inventory management' within <Provider/> */}
       <SafeAreaProvider>
         <RootStackNavigator />
       </SafeAreaProvider>

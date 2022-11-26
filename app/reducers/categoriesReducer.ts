@@ -2,6 +2,7 @@ import * as CONST from '../utils/Constants';
 
 const initialState = {
   categories: [],
+  listItems: []
 };
 
 export default function categoriesReducer(state = initialState, action) {
@@ -22,6 +23,12 @@ export default function categoriesReducer(state = initialState, action) {
       return {
         ...state,
         categories: action.payload
+      };
+      break;
+    case "ADD_LIST_ITEM_SUCCESS":
+      return {
+        ...state,
+        listItems: action.payload
       };
       break;
     default:

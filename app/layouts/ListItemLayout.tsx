@@ -2,31 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, FlatList, Switch } from 'react-native';
 import Theme from '../utils/Theme';
 import TextField from '../components/TextField';
-import { ADD_CATEGORY_LAYOUT } from '../utils/Constants';
-import { images } from '../assets';
-import Button from '../components/Button';
-import Dropdown from '../components/Dropdown';
-
-// [ { id: 0, name: '', type: 'TEXT' } ]
+import DatePicker from 'react-native-date-picker'
 
 type Props = {
   fields: any;
+  onEditFields: (any) => void;
 }
 
-const ListItemLayout = ({ fields }: Props) => {
+const ListItemLayout = ({ fields, onEditFields }: Props) => {
+  const [openDatePicker, setDatePickerStatus] = useState(false);
+  // const [openDatePicker, setDatePickerStatus] = useState(false);
+
   const RenderTextField = (item) => {
     return (
       <TextField
         label={item.name}
-      // value={name}
-      // onChange={(text) => setName(text)}
+        value={item.name}
+        onChange={(text) => setName(text, item)}
       />
     )
   }
 
-  const RenderDateInput = () => {
+  const setName = (value, item) => {
+    const objIndex = fields.findIndex((obj => obj.id == item.id));
+    fields[objIndex] = {
+      ...item,
+      name: value,
+    }    
+    onEditFields(fields)
+
+  }
+
+  const RenderDateInput = (item) => {
     return (
-      <View />
+      <TextField
+        label={item.name}
+        // value={item.name}
+        // onChange={(text) => setName(text)}
+      />
     )
   }
 
@@ -40,12 +53,15 @@ const ListItemLayout = ({ fields }: Props) => {
     )
   }
 
-  const RenderCheckbox = () => {
+  const RenderCheckbox = (item) => {
     return (
-      <Switch
-        // onValueChange={toggleSwitch}
-        value={false}
-      />
+      <View style={styles.checkboxStyle}>
+        <Switch
+          // onValueChange={toggleSwitch}
+          value={false}
+        />
+        <Text>{item.name}</Text>
+      </View>
     )
   }
 
@@ -57,13 +73,25 @@ const ListItemLayout = ({ fields }: Props) => {
         renderItem={({ item }) => (
           <View style={styles.listView}>
             {item.type === "TEXT" ? <RenderTextField {...item} /> :
-              item.type === "NUMBER" ? <RenderNumber /> :
-                item.type === "DATE" ? <RenderDateInput /> :
-                  <RenderCheckbox />}
+              item.type === "NUMBER" ? <RenderNumber {...item} /> :
+                item.type === "DATE" ? <RenderDateInput {...item} /> :
+                  <RenderCheckbox {...item} />}
           </View>
         )}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
+      />
+      <DatePicker
+        modal
+        open={openDatePicker}
+        date={new Date()}
+        onConfirm={(date) => {
+          setDatePickerStatus(false)
+          // setDate(date)
+        }}
+        onCancel={() => {
+          setDatePickerStatus(false)
+        }}
       />
     </View>
   )
@@ -84,6 +112,10 @@ const styles = StyleSheet.create({
   },
   listView: {
     paddingBottom: 10
+  },
+  checkboxStyle: {
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
 export default ListItemLayout;

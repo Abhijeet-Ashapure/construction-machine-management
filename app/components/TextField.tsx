@@ -36,7 +36,7 @@ const TextField = (props: TextFieldProps) => {
                 props.style
                   ? props.style
                   : styles.textfield
-              }
+            }
         />
     );
 };

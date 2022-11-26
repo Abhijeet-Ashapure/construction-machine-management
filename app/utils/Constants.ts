@@ -1,8 +1,7 @@
-// WeatherSearch Screen
+
 export const CONSTANTS = {
-  TITLE: "Weather Search",
+  TITLE: "Inventory management Search",
   button: "Search",
-  lengthAlert: "Please enter city name",
 };
 
 export const MANAGE_CATEGORIES = {
