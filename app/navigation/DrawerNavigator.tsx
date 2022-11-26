@@ -28,7 +28,7 @@ const DrawerNavigator = ({ getCategories, categories }: Props) => {
     <Drawer.Navigator>
       <Drawer.Screen name="Dashboard" component={Dashboard} />
       {
-        categories.map((item) => item.name !== "" && <Drawer.Screen name={item.name} component={Category} />)
+        categories.map((item) => item.name !== "" && <Drawer.Screen name={item.name} component={() => <Category {...item}/>} />)
       }
       <Drawer.Screen name="ManageCategories" component={ManageCategories} />
     </Drawer.Navigator>

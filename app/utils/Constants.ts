@@ -16,3 +16,7 @@ export const ADD_CATEGORY_LAYOUT = {
   remove: "REMOVE",
   addDropdowndata: ["TEXT", "CHECKBOX", "DATE", "NUMBER"],
 };
+
+export const ADD_CATEGORYITEM_LAYOUT = {
+  label: 'ADD NEW ITEM',
+};
